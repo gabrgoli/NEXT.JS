@@ -2,10 +2,10 @@ import { Typography, Grid, Chip, Link } from '@mui/material';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { ShopLayout } from "../../components/layouts"
 import NextLink from 'next/link';
-import { getSession } from 'next-auth/react';
-import { dbOrders } from '../../database';
+//import { getSession } from 'next-auth/react';
+//import { dbOrders } from '../../database';
 import { GetServerSideProps, NextPage } from 'next';
-import { IOrder } from '../../interfaces';
+import { IOrder } from '../../interfaces/order';
 
 const columns: GridColDef[]= [
     {field: 'id', headerName: 'ID', width:100},
@@ -65,12 +65,12 @@ const HistoryPage: NextPage<Props> = ({ orders }) => {
 
     // const rows = ..  
     // { id: indice + 1, paid: true, fullname: 'Fernando Herrera', orderId: 1283781237123 }
-    const rows:any = orders.map( (order, idx) => ({
-        id: idx + 1,
-        paid: order.isPaid,
-        fullname: `${ order.shippingAddress.firstName } ${ order.shippingAddress.lastName }`,
-        orderId: order._id
-    }))
+    // const rows:any = orders?.map( (order, idx) => ({
+    //     id: idx + 1,
+    //     paid: order.isPaid,
+    //     fullname: `${ order.shippingAddress.firstName } ${ order.shippingAddress.lastName }`,
+    //     orderId: order._id
+    // }))
 
 
 
@@ -101,28 +101,28 @@ const HistoryPage: NextPage<Props> = ({ orders }) => {
 // You should use getServerSideProps when:
 // - Only if you need to pre-render a page whose data must be fetched at request time
 
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+// export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     
-    const session: any = await getSession({ req });
+//     const session: any = await getSession({ req });
 
-    if ( !session ) {
-        return {
-            redirect: {
-                destination: '/auth/login?p=/orders/history',
-                permanent: false,
-            }
-        }
-    }
+//     if ( !session ) {
+//         return {
+//             redirect: {
+//                 destination: '/auth/login?p=/orders/history',
+//                 permanent: false,
+//             }
+//         }
+//     }
 
-    const orders = await dbOrders.getOrdersByUser( session.user._id );
+//     const orders = await dbOrders.getOrdersByUser( session.user._id );
 
 
-    return {
-        props: {
-            orders
-        }
-    }
-}
+//     return {
+//         props: {
+//             orders
+//         }
+//     }
+// }
 
 
 export default HistoryPage;

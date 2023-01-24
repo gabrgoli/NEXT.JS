@@ -115,7 +115,8 @@ const LoginPage = () => {
                     <Grid item xs={12} display='flex' justifyContent='end'>
                             <NextLink 
                                 href={ router.query.p ? `/auth/register?p=${ router.query.p }`: '/auth/register' } 
-                                passHref>
+                                passHref
+                                legacyBehavior>
                                 <Link underline='always'>
                                     ¿No tienes cuenta?
                                 </Link>

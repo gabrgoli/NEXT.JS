@@ -4,48 +4,48 @@ import NextLink from 'next/link'
 
 import { ShopLayout } from '../../components/layouts';
 import { useContext, useEffect, useState } from 'react';
-import Cookies from 'js-cookie';
+//import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
-import { CartContext } from '../../context';
+//import { CartContext } from '../../context';
 
 const SummaryPage=()=>{
 
 
     const router = useRouter();
-    const { shippingAddress, numberOfItems, createOrder } = useContext( CartContext );
+    //const { shippingAddress, numberOfItems, createOrder } = useContext( CartContext );
 
     const [isPosting, setIsPosting] = useState(false); //cuando empiezo a hacer el posteo
     const [errorMessage, setErrorMessage] = useState('');
     
-    useEffect(() => {
-        if ( !Cookies.get('firstName') ) {
-            router.push('/checkout/address');
-        }
-    }, [ router ]);
+    // useEffect(() => {
+    //     if ( !Cookies.get('firstName') ) {
+    //         router.push('/checkout/address');
+    //     }
+    // }, [ router ]);
     
 
     const onCreateOrder = async() => {
         setIsPosting(true);
 
-        const { hasError, message } = await createOrder(); 
+        //const { hasError, message } = await createOrder(); 
 
-        if ( hasError ) {
-            setIsPosting(false);
-            setErrorMessage( message );
-            return;
-        }
+        // if ( hasError ) {
+        //     setIsPosting(false);
+        //     setErrorMessage( message );
+        //     return;
+        // }
 
-        router.replace(`/orders/${ message }`);
+        // router.replace(`/orders/${ message }`);
 
     }
 
 
 
-    if ( !shippingAddress ) {
-        return <></>;
-    }
+    // if ( !shippingAddress ) {
+    //     return <></>;
+    // }
 
-    const { firstName, lastName, address, address2 = '', city, country, phone, zip } = shippingAddress;
+    //const { firstName, lastName, address, address2 = '', city, country, phone, zip } = shippingAddress;
     
     return(
         <ShopLayout title='Resumen de orden' pageDescription={'Resumen de la orden'} imageFullUrl={undefined}>
@@ -64,7 +64,7 @@ const SummaryPage=()=>{
 
                             <Box display='flex' justifyContent='space-between'>
                                 <Typography variant='subtitle1'> Dirección de entrega</Typography>
-                                <NextLink href='/checkout/adress' passHref legacyBehavior>
+                                <NextLink href='/checkout/address' passHref legacyBehavior>
                                     <Link underline='always'>
                                         Editar
                                     </Link>
