@@ -1,9 +1,10 @@
-import { ItemCounter } from '@/components/ui/ItemCounter';
+
 import { ISize } from '@/interfaces';
 import { Box, Button, Chip, Grid, Typography } from '@mui/material';
 import { ShopLayout } from '../../components/layouts';
 import { ProductSlideshow, SizeSelector } from '../../components/products';
 import { initialData } from '../../database/products';
+import { ItemCounter } from '../../components/ui/';
 
 const product = initialData.products[0];
 

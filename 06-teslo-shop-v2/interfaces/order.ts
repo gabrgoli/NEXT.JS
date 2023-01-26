@@ -1,4 +1,5 @@
-import { ISize, IUser } from './';
+import { ISize } from './';
+import {IUser} from './user'
 
 export interface IOrder {
 
