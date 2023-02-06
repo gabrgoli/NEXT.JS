@@ -17,7 +17,7 @@ export const NavBar = () => {
     //const numberOfItems=10;
 
     const [searchTerm, setSearchTerm] = useState('');
-    const [isSearchVisible, setIsSearchVisible] = useState(false);
+    const [isSearchVisible, setIsSearchVisible] = useState(false);//cuando la persona esta buscando
 
 
     const onSearchTerm = () => {
