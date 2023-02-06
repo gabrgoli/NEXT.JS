@@ -15,7 +15,7 @@ export const getProductBySlug = async( slug: string): Promise<IProduct | null> =
     return JSON.parse(JSON.stringify(product));
 }
 
-interface ProductSlug {
+interface ProductSlug { //esta interfaz la creo porque getAllProductSlugs devuelve un string (algo asi)
     slug: string;
 }
 export const getAllProductSlugs = async(): Promise<ProductSlug[]>  => {
@@ -28,7 +28,7 @@ export const getAllProductSlugs = async(): Promise<ProductSlug[]>  => {
     return slugs;
 }
 
-
+//para buscar prodcutos
 export const getProductsByTerm = async ( term:string): Promise<IProduct[]> => {
     
     term = term.toString().toLowerCase();

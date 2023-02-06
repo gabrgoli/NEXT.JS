@@ -3,14 +3,14 @@ import { useContext, useState } from 'react';
 import { Box, Divider, Drawer, IconButton, Input, InputAdornment, List, ListItem, ListItemIcon, ListItemText, ListSubheader } from "@mui/material"
 import { AccountCircleOutlined, AdminPanelSettings, CategoryOutlined, ConfirmationNumberOutlined, EscalatorWarningOutlined, FemaleOutlined, LoginOutlined, MaleOutlined, SearchOutlined, VpnKeyOutlined } from "@mui/icons-material"
 
-//import { UiContext } from '../../context/ui/UiContext';
+import { UiContext } from '../../context/ui/UiContext';
 import { useRouter } from 'next/router';
 
 
 export const SideMenu = () => {
 
     const router = useRouter();
-   // const { isMenuOpen, toggleSideMenu } = useContext( UiContext );
+    const { isMenuOpen, toggleSideMenu } = useContext( UiContext );
 
     const [searchTerm, setSearchTerm] = useState('');
 
@@ -21,17 +21,17 @@ export const SideMenu = () => {
 
     
     const navigateTo = ( url: string ) => {
-        //toggleSideMenu();
+        toggleSideMenu();
         router.push(url);
     }
 
 
   return (
     <Drawer
-       // open={ isMenuOpen }
+        open={ isMenuOpen }
         anchor='right'
         sx={{ backdropFilter: 'blur(4px)', transition: 'all 0.5s ease-out' }}
-       // onClose={ toggleSideMenu }
+        onClose={ toggleSideMenu }
     >
         <Box sx={{ width: 250, paddingTop: 5 }}>
             
@@ -40,7 +40,7 @@ export const SideMenu = () => {
                 <ListItem>
                     <Input
                         autoFocus
-                        value={ searchTerm }
+                        value={ searchTerm } //es el estado del input
                         onChange={ (e) => setSearchTerm( e.target.value ) }
                         onKeyPress={ (e) => e.key === 'Enter' ? onSearchTerm() : null }
                         type='text'

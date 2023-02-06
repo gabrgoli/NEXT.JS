@@ -1,3 +1,4 @@
+import { UiProvider } from '@/context'
 import '@/styles/globals.css'
 import { lightTheme } from '@/themes'
 import { ThemeProvider } from '@emotion/react'
@@ -11,10 +12,12 @@ export default function App({ Component, pageProps }: AppProps) {
       //refreshInterval:3000,
       fetcher: (resource, init) => fetch(resource, init).then(res => res.json())
     }}>
-      <ThemeProvider theme={lightTheme}>
-        <CssBaseline/>
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <UiProvider>
+        <ThemeProvider theme={lightTheme}>
+          <CssBaseline/>
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </UiProvider>
     </SWRConfig>
   )
 }

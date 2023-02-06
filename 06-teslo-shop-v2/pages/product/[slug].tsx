@@ -36,9 +36,8 @@ const onUpdateQuantity = ( quantity: number ) => {
 
 const ProductPage:NextPage<Props> = ({product}) => {
 
-  const router = useRouter();
-
-  // const { products:product, isLoading} = useProducts <IProduct> (`/products/${router.query.slug}`)
+  //const router = useRouter();
+  //const { products:product, isLoading} = useProducts <IProduct> (`/products/${router.query.slug}`)
 
 
   return (

@@ -4,7 +4,7 @@ import {AppBar, Link,Toolbar,Typography,Box,Button,IconButton, Badge, Input, Inp
 import { ClearOutlined, SearchOutlined,ShoppingCartOutlined } from '@mui/icons-material';
 import { useRouter } from 'next/router';
 import { useContext, useState } from 'react';
-//import { UiContext,CartContext } from '../../context';
+import { UiContext } from '../../context';
 
 
 
@@ -12,9 +12,9 @@ export const NavBar = () => {
 
     const {asPath, push} = useRouter(); //me da el path como asPath tambien tiene  pathname o route, /category/women
 
-    //const { toggleSideMenu } = useContext( UiContext );
+    const { toggleSideMenu } = useContext( UiContext );
     //const { numberOfItems } = useContext( CartContext );
-    //const numberOfItems=10;
+    const numberOfItems=10;
 
     const [searchTerm, setSearchTerm] = useState('');
     const [isSearchVisible, setIsSearchVisible] = useState(false);//cuando la persona esta buscando
@@ -45,7 +45,7 @@ export const NavBar = () => {
 
                 <NextLink href='/category/women' passHref legacyBehavior>
                     <Link>
-                        <Button color ={asPath=== '/category/women'? 'primary' : 'info'} >mujeresa</Button>
+                        <Button color ={asPath === '/category/women'? 'primary' : 'info'} >mujeresa</Button>
                     </Link>
                 </NextLink>
 
@@ -93,13 +93,13 @@ export const NavBar = () => {
                         type='text'
                         placeholder="Buscar..."
                         endAdornment={
-                        <InputAdornment position="end">
-                            <IconButton
-                                onClick={()=> setIsSearchVisible(false)}
-                            >
-                            <ClearOutlined />
-                            </IconButton>
-                        </InputAdornment>
+                            <InputAdornment position="end">
+                                <IconButton
+                                    onClick={()=> setIsSearchVisible(false)}
+                                >
+                                <ClearOutlined />
+                                </IconButton>
+                            </InputAdornment>
                     }
                 />
 
@@ -119,10 +119,10 @@ export const NavBar = () => {
 
 
 
-
+            {/* pantallas pequeñas */}
             <IconButton
                 sx={{display:{xs:'flex', sm: 'none'}}}
-                //onClick={toggleSideMenu}
+                onClick={toggleSideMenu}
             >
                     <SearchOutlined/>
             </IconButton>
@@ -130,17 +130,17 @@ export const NavBar = () => {
             <NextLink href='/cart' passHref legacyBehavior>
                     <Link>
                         <IconButton>
-                            {/* <Badge badgeContent={ numberOfItems > 9 ? '+9': numberOfItems  } color="secondary">
+                            <Badge badgeContent={ numberOfItems > 9 ? '+9': numberOfItems  } color="secondary">
                                 <ShoppingCartOutlined/>
-                            </Badge> */}
+                            </Badge>
                         </IconButton>
                     </Link>
             </NextLink>
 
             {/* <Button onClick={ toggleSideMenu }> */}
-            {/* <Button onClick={ toggleSideMenu }>
+            <Button onClick={ toggleSideMenu }>
                 Menu
-            </Button> */}
+            </Button>
 
         </Toolbar>
      </AppBar>
