@@ -1,7 +1,8 @@
 import NextLink from 'next/link';
 import { Box, Grid, Typography, TextField, Button, Link, Chip } from '@mui/material';
 import { AuthLayout } from '../../components/layouts';
-import { ErrorOutline } from '@mui/icons-material';
+//import { ErrorOutline } from '@mui/icons-material';
+import  ErrorOutline  from '@mui/icons-material/ErrorOutline';
 // import { validations } from '../../utils';
 import { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';

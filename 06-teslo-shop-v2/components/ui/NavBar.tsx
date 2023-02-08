@@ -1,7 +1,10 @@
 import NextLink from 'next/link';
 
 import {AppBar, Link,Toolbar,Typography,Box,Button,IconButton, Badge, Input, InputAdornment} from '@mui/material'
-import { ClearOutlined, SearchOutlined,ShoppingCartOutlined } from '@mui/icons-material';
+// import { ClearOutlined, SearchOutlined,ShoppingCartOutlined } from '@mui/icons-material';
+import ClearOutlined from '@mui/icons-material/ClearOutlined';
+import SearchOutlined from '@mui/icons-material/SearchOutlined';
+import ShoppingCartOutlined from '@mui/icons-material/ShoppingCartOutlined';
 import { useRouter } from 'next/router';
 import { useContext, useState } from 'react';
 import { UiContext } from '../../context';

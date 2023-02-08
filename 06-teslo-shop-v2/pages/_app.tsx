@@ -1,4 +1,5 @@
 import { UiProvider } from '@/context'
+import { CartProvider } from '@/context/cart'
 import '@/styles/globals.css'
 import { lightTheme } from '@/themes'
 import { ThemeProvider } from '@emotion/react'
@@ -12,12 +13,14 @@ export default function App({ Component, pageProps }: AppProps) {
       //refreshInterval:3000,
       fetcher: (resource, init) => fetch(resource, init).then(res => res.json())
     }}>
-      <UiProvider>
-        <ThemeProvider theme={lightTheme}>
-          <CssBaseline/>
-          <Component {...pageProps} />
-        </ThemeProvider>
-      </UiProvider>
+      <CartProvider>
+        <UiProvider>
+          <ThemeProvider theme={lightTheme}>
+            <CssBaseline/>
+            <Component {...pageProps} />
+          </ThemeProvider>
+        </UiProvider>
+      </CartProvider>
     </SWRConfig>
   )
 }

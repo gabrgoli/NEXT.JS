@@ -1,5 +1,5 @@
 
-import { ISize } from '@/interfaces';
+import { ICartProduct, ISize } from '@/interfaces';
 import { Box, Button, Chip, Grid, Typography } from '@mui/material';
 import { ShopLayout } from '../../components/layouts';
 import { ProductSlideshow, SizeSelector } from '../../components/products';
@@ -10,7 +10,8 @@ import { useProducts } from '@/hooks';
 import { IProduct } from '@/interfaces';
 import { GetServerSideProps, GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import {dbProducts} from '../../database'
-import { FC } from 'react';
+import { FC, useContext, useState } from 'react';
+import { CartContext } from '@/context/cart';
 
 interface Props{
   product: IProduct
@@ -19,27 +20,47 @@ interface Props{
 
 const product = initialData.products[0];
 
-const selectedSize = ( size: ISize ) => {
-  console.log("En padre:",size);
-  //  setTempCartProduct( currentProduct => ({
-  //    ...currentProduct,
-  //   size
-  // }));
-}
-
-const onUpdateQuantity = ( quantity: number ) => {
-  // setTempCartProduct( currentProduct => ({
-  //   ...currentProduct,
-  //   quantity
-  // }));
-}
-
 const ProductPage:NextPage<Props> = ({product}) => {
 
   //const router = useRouter();
   //const { products:product, isLoading} = useProducts <IProduct> (`/products/${router.query.slug}`)
 
+  const router = useRouter();
+  const { addProductToCart } = useContext( CartContext )
 
+  const [tempCartProduct, setTempCartProduct] = useState<ICartProduct>({
+    _id: product._id,
+    image: product.images[0],
+    price: product.price,
+    size: undefined,
+    slug: product.slug,
+    title: product.title,
+    gender: product.gender,
+    quantity: 1,
+  })
+
+  const selectedSize = ( size: ISize ) => {
+    setTempCartProduct( currentProduct => ({
+      ...currentProduct,
+      size
+    }));
+  }
+
+  const onUpdateQuantity = ( quantity: number ) => {
+    setTempCartProduct( currentProduct => ({
+      ...currentProduct,
+      quantity
+    }));
+  }
+
+
+  const onAddProduct = () => {
+
+    if ( !tempCartProduct.size ) { return; }
+
+    addProductToCart(tempCartProduct);
+    router.push('/cart');
+  }
   return (
     <ShopLayout title={ product.title } pageDescription={ product.description }>
     
@@ -74,11 +95,34 @@ const ProductPage:NextPage<Props> = ({product}) => {
               />
             </Box>
 
-
             {/* Agregar al carrito */}
-            <Button color="secondary" className='circular-btn'>
-              Agregar al carrito
-            </Button>
+            {
+              (product.inStock>0)
+              ?(
+              
+              <Button 
+                color="secondary" 
+                className='circular-btn'
+                onClick={ onAddProduct }
+              >
+                {
+                  tempCartProduct.size?
+                  'Agregar al carrito'
+                  :'Seleccione una talla'
+
+
+                }
+              </Button>
+
+              )
+              :
+              (
+                <Chip label = "No hay disponibles" color = "error" variant = 'outlined'/>
+              )
+            }
+
+
+
 
             {/* <Chip label="No hay disponibles" color="error" variant='outlined' /> */}
 
